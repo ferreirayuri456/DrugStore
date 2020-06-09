@@ -27,11 +27,11 @@ public class Manufacturer{
 	@Column(name = "FANTASY_NAME")
 	private String fantasyName;
 	@Column(name = "CNPJ")
-	private Long cnpj;
+	private Integer cnpj;
 	@Column(name = "COUNTRY_ORIGIN")
 	private String countryOrigin;
 	
-	public Manufacturer(String codeManufacturer, String fantasyName, Long cnpj, String countryOrigin) {
+	public Manufacturer(String codeManufacturer, String fantasyName, Integer cnpj, String countryOrigin) {
 		this.codeManufacturer = codeManufacturer;
 		this.fantasyName = fantasyName;
 		this.cnpj = cnpj;

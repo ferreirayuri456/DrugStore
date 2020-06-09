@@ -1,4 +1,4 @@
-package br.com.example.farmacia.util;
+package br.com.example.farmacia.config;
 
 import java.io.File;
 import java.io.IOException;

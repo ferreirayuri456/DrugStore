@@ -22,9 +22,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import br.com.example.farmacia.config.Util;
 import br.com.example.farmacia.model.Manufacturer;
 import br.com.example.farmacia.repository.ManufacturerRepository;
-import br.com.example.farmacia.util.Util;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -38,11 +38,11 @@ public class TestManufacturer {
 
 	@Autowired
 	ObjectMapper objectMapper;
-	private static Manufacturer manu = new Manufacturer(1, "Dorflex", "Dorflex", (long) 1234567, "Brazil");
+	private static Manufacturer manu = new Manufacturer(1, "Dorflex", "Dorflex",1234567, "Brazil");
 
 	@Test
 	public void testStoreManufacturer() {
-		Manufacturer manu = new Manufacturer(1, "Dorflex", "Dorflex", (long) 1234567, "Brazil");
+		Manufacturer manu = new Manufacturer(1, "Dorflex", "Dorflex",1234567, "Brazil");
 		this.manuRepository.save(manu);
 		assertThat(manu.getId()).isNotNull();
 		assertThat(manu.getCodeManufacturer()).isEqualTo("Dorflex");
@@ -54,7 +54,7 @@ public class TestManufacturer {
 
 	@Test
 	public void testRemoveManufacturer() {
-		Manufacturer manu = new Manufacturer(1, "Dorflex", "Dorflex", (long) 1234567, "Brazil");
+		Manufacturer manu = new Manufacturer(1, "Dorflex", "Dorflex",1234567, "Brazil");
 		this.manuRepository.save(manu);
 		manuRepository.delete(manu);
 		assertThat(manuRepository.findById(manu.getId())).isEmpty();
@@ -62,11 +62,11 @@ public class TestManufacturer {
 
 	@Test
 	public void testUpdateManufacturer() {
-		Manufacturer manu = new Manufacturer(1, "Dorflex", "Dorflex", (long) 1234567, "Brazil");
+		Manufacturer manu = new Manufacturer(1, "Dorflex", "Dorflex", 1234567, "Brazil");
 		this.manuRepository.save(manu);
 		manu.setCodeManufacturer("Buscofem");
 		manu.setFantasyName("Comprimido para cólicas menstruais");
-		manu.setCnpj((long) 12365489);
+		manu.setCnpj(12365489);
 		manu.setCountryOrigin("EUA");
 		this.manuRepository.save(manu);
 		assertThat(manu.getId()).isNotNull();
@@ -121,7 +121,7 @@ public class TestManufacturer {
 			
 			mockMvc.perform(put("/manufacturer/update/1", manu.getId()).header("Accept", "Application/json")
 					.contentType(MediaType.APPLICATION_JSON_VALUE)
-					.content(objectMapper.writeValueAsString(new Manufacturer(1, "Dorflex", "Dorflex", (long) 1234567, "Brazil"))))
+					.content(objectMapper.writeValueAsString(new Manufacturer(1, "Dorflex", "Dorflex",1234567, "Brazil"))))
 					.andDo(print()).andExpect(status().isOk());
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND,

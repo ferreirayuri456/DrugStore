@@ -1,19 +1,10 @@
 package br.com.example.farmacia.cucumber.steps;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.CoreMatchers.is;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import br.com.example.farmacia.util.RestAssuredExtension;
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import cucumber.api.java.it.Ma;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseOptions;
 

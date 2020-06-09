@@ -11,8 +11,8 @@ import javax.persistence.criteria.Root;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
 
-import br.com.example.farmacia.controller.dto.ProductDto;
 import br.com.example.farmacia.model.Product;
+import br.com.example.farmacia.model.dto.ProductDto;
 
 public class SpecificationProduct {
 

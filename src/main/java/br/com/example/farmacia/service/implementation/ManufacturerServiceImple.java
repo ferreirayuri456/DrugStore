@@ -2,12 +2,15 @@ package br.com.example.farmacia.service.implementation;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import br.com.example.farmacia.controller.dto.ManufacturerDto;
 import br.com.example.farmacia.model.Manufacturer;
+import br.com.example.farmacia.model.dto.ManufacturerDto;
 import br.com.example.farmacia.repository.ManufacturerRepository;
 import br.com.example.farmacia.service.ManufacturerService;
 
@@ -21,29 +24,39 @@ public class ManufacturerServiceImple implements ManufacturerService {
 	ManufacturerRepository manuRepository;
 
 	@Override
+	@Transactional
 	public List<ManufacturerDto> listManufacturer() {
 		List<Manufacturer> manu = manuRepository.findAll();
 		return ManufacturerDto.conversor(manu);
 	}
 
 	@Override
-	public ManufacturerDto updateManufacturer(Integer code, ManufacturerDto dto) {
-		Manufacturer manu = dto.update(code, manuRepository);
-		Manufacturer manuPersisted = manuRepository.save(modelMapper.map(manu, Manufacturer.class));
-		return modelMapper.map(manuPersisted, ManufacturerDto.class);
+	@Transactional
+	public ResponseEntity<Manufacturer> updateManufacturer(Integer code, ManufacturerDto dto) {
+		return manuRepository.findById(code).map(mapper -> {
+			mapper.setCodeManufacturer(dto.getCodeManufacturer());
+			mapper.setCountryOrigin(dto.getCountryOrigin());
+			mapper.setFantasyName(dto.getFantasyName());
+			mapper.setCnpj(dto.getCnpj());
+			Manufacturer manu = manuRepository.save(mapper);
+			return ResponseEntity.ok().body(manu);
+		}).orElse(ResponseEntity.notFound().build());
 	}
 
 	@Override
-	public ManufacturerDto removeManufacturer(Integer code) {
-		Manufacturer manu = manuRepository.getOne(code);
-		manuRepository.deleteById(code);
-		return modelMapper.map(manu, ManufacturerDto.class);
+	@Transactional
+	public ResponseEntity<?> removeManufacturer(Integer code) {
+		return manuRepository.findById(code).map(mapper -> {
+			manuRepository.deleteById(code);
+			return ResponseEntity.ok().build();
+		}).orElse(ResponseEntity.notFound().build());
 	}
 
 	@Override
+	@Transactional
 	public ManufacturerDto storeManufacturer(ManufacturerDto dto) {
-		Manufacturer manu = modelMapper.map(dto, Manufacturer.class);
-		return modelMapper.map(this.manuRepository.save(manu), ManufacturerDto.class);
+		return modelMapper.map(this.manuRepository.save(modelMapper.map(dto, Manufacturer.class)),
+				ManufacturerDto.class);
 	}
 
 }

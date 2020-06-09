@@ -1,35 +1,32 @@
-package br.com.example.farmacia.controller.dto;
+package br.com.example.farmacia.model.dto;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import br.com.example.farmacia.model.Product;
-import br.com.example.farmacia.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductDto {
-	
+
 	private Integer id;
-	@NotNull
+
+	@NotNull(message = "O campo code product não pode ser vazio")
 	private Integer codeProduct;
-	@NotNull
+	@NotBlank(message = "{nameProduct.not.blank}")
 	private String nameProduct;
-	@NotNull
+	@NotBlank(message = "{fantasyName.not.blank}")
 	private String fantasyName;
-	@NotNull
+	@NotBlank(message = "{manufacturer.not.blank}")
 	private String manufacturer;
-	@NotNull
+	@NotNull(message = "O campo price não pode ser vazio")
 	private int price;
 
 	public ProductDto(Product product) {
@@ -52,17 +49,6 @@ public class ProductDto {
 		return products.stream().map(ProductDto::new).collect(Collectors.toList());
 	}
 
-	public Product update(Integer id, ProductRepository productRepository) {
-		Product product = productRepository.getOne(id);
-		product.setCodeProduct(this.codeProduct);
-		product.setFantasyName(this.fantasyName);
-		product.setNameProduct(this.nameProduct);
-		product.setPrice(this.price);
-		product.setManufacturer(this.manufacturer);
-
-		return product;
-	}
-
 	public Product newProduct() {
 		return new Product(codeProduct, fantasyName, nameProduct, price, manufacturer);
 	}
@@ -77,6 +63,6 @@ public class ProductDto {
 	public ProductDto(String nameProduct, String fantasyName) {
 		this.nameProduct = nameProduct;
 		this.fantasyName = fantasyName;
-		
+
 	}
 }

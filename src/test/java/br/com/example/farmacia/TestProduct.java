@@ -23,11 +23,11 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import br.com.example.farmacia.config.Util;
 import br.com.example.farmacia.controller.ProductController;
 import br.com.example.farmacia.model.Product;
 import br.com.example.farmacia.repository.ProductRepository;
 import br.com.example.farmacia.service.ProductService;
-import br.com.example.farmacia.util.Util;
 
 @SpringBootTest
 @AutoConfigureMockMvc

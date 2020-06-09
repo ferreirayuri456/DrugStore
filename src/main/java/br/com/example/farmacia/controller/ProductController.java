@@ -15,47 +15,53 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.example.farmacia.controller.dto.ProductDto;
 import br.com.example.farmacia.model.Product;
+import br.com.example.farmacia.model.dto.ProductDto;
 import br.com.example.farmacia.service.ProductService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
+@Api(value = "Produtos")
 public class ProductController {
 
 	@Autowired
 	ProductService prodService;
 
 	
-	@ApiOperation(value = "Store new product",
+	@ApiOperation(value = "Inserir um novo produto",
 			response = ProductDto.class,
-			notes = "This operation store a new product with informations in database")
+			notes = "Essa informação guarda novas informações na base de dados")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200,
-					message = "Return an ProductDto with informations a product",
+					message = "Retorna uma lista de produtos",
 					response = ProductDto.class),
 			@ApiResponse(code = 500,
-			message = "If we have anyone problem returns a Exception",
+			message = "Se tivermos algum problema, retornaremos uma exceção",
 			response = ProductDto.class),
 			
 	})
-	@PostMapping("/product/store")
+	@PostMapping("/")
 	public ProductDto storeProduct(@RequestBody @Valid ProductDto dto) throws Exception {
 		return prodService.storeProduct(dto);
 	}
 
 	
-	@ApiOperation(value = "List an existing product by name product and fantasy name",
+	@ApiOperation(value = "Lista os produtos por nome do produto e/ou nome fantasia",
 			response = ProductDto.class,
-			notes = "This operation list an existing product with information in database")
+			notes = "Essa operação resgata do banco de dados os produtos")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200,
-					message = "Return an ProductDto with informations a product",
-					response = ProductDto.class)
+					message = "Retorna uma lista de produtos",
+					response = ProductDto.class),
+			@ApiResponse(code = 403,
+					message = "Você não tem permissão para acessar este recurso"),
+			@ApiResponse(code = 500,
+					message = "Foi gerada uma exceção"),
 	})
-	@GetMapping("/product/listAll")
+	@GetMapping("/")
 	public ResponseEntity<List<Product>> searchProducts(
 			@RequestParam(required = false) String nameProduct,
 			@RequestParam(required = false) String fantasyName) throws Exception{
@@ -64,30 +70,30 @@ public class ProductController {
 	}
 
 	
-	@ApiOperation(value = "Update an existing product",
+	@ApiOperation(value = "Atualiza um produto existente",
 			response = ProductDto.class,
-			notes = "This operation updates an existing product with information in database")
+			notes = "Essa operação atualiza as informações de um produto existente na base de dados")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200,
-					message = "Return an ProductDto with informations a product",
+					message = "Retorna uma lista de produtos",
 					response = ProductDto.class)
 	})
-	@PutMapping("/product/update/{id}")
-	public ProductDto updateProduct(@PathVariable("id") Integer code, @RequestBody @Valid ProductDto dto) throws Exception {
+	@PutMapping(path = {"/{id}"})
+	public ResponseEntity<Product> updateProduct(@PathVariable("id") Integer code, @RequestBody @Valid ProductDto dto) throws Exception {
 		return prodService.updateProduct(code, dto);
 	}
 
 	
-	@ApiOperation(value = "Remove an existing product",
+	@ApiOperation(value = "Remove um produto existente",
 			response = ProductDto.class,
-			notes = "This operation removes an existing product with information in database")
+			notes = "Essa operação remove o produto e suas informações da base de dados")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200,
-					message = "Return an ProductDto with informations a product",
+					message = "Retorna uma lista de produtos",
 					response = ProductDto.class)
 	})
-	@DeleteMapping("/product/remove/{id}")
-	public ProductDto removeProduct(@PathVariable("id") Integer code) throws Exception {
+	@DeleteMapping(path = {"/{id}"})
+	public ResponseEntity<?> removeProduct(@PathVariable("id") Integer code) throws Exception {
 		return prodService.removeProduct(code);
 	}
 }
