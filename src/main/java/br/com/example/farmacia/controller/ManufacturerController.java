@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.example.farmacia.model.Manufacturer;
-import br.com.example.farmacia.model.dto.ManufacturerDto;
+import br.com.example.farmacia.model.dto.ManufacturerDTO;
 import br.com.example.farmacia.service.ManufacturerService;
 
 @RestController
@@ -25,18 +25,18 @@ public class ManufacturerController {
 	ManufacturerService manuService;
 
 	@PostMapping("manufacturer/")
-	public ManufacturerDto storeManufacturer(@RequestBody @Valid ManufacturerDto dto) throws Exception {
+	public ManufacturerDTO storeManufacturer(@RequestBody @Valid ManufacturerDTO dto) throws Exception {
 		return manuService.storeManufacturer(dto);
 	}
 
 	@GetMapping("manufacturer/")
-	public List<ManufacturerDto> listManufacturer() throws Exception {
+	public List<ManufacturerDTO> listManufacturer() throws Exception {
 		return manuService.listManufacturer();
 	}
 
 	@PutMapping("manufacturer/{id}")
 	public ResponseEntity<Manufacturer> updateManufacturer(@PathVariable("id") Integer code,
-			@RequestBody @Valid ManufacturerDto dto) throws Exception {
+			@RequestBody @Valid ManufacturerDTO dto) throws Exception {
 		return manuService.updateManufacturer(code, dto);
 	}
 

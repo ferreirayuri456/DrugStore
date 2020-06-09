@@ -12,14 +12,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
 
 import br.com.example.farmacia.model.Product;
-import br.com.example.farmacia.model.dto.ProductDto;
+import br.com.example.farmacia.model.dto.ProductDTO;
 
 public class SpecificationProduct {
 
 	public static final String NAME_PRODUCT = "nameProduct";
 	public static final String FANTASY_NAME = "fantasyName";
 
-	public static Specification<Product> findBySpecification(ProductDto filtro) {
+	public static Specification<Product> findBySpecification(ProductDTO filtro) {
 		return new Specification<Product>() {
 
 			/**

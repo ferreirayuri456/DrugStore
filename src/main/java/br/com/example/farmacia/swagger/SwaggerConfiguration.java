@@ -17,14 +17,14 @@ public class SwaggerConfiguration {
 
 	public Docket compassoApi() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("br.com.compasso.PMA.Parameters"))
+				.apis(RequestHandlerSelectors.basePackage("br.com.example.farmacia.service.implementation"))
 				.paths(PathSelectors.ant("/**")).build();
 	}
 
 	private ApiInfo informationsApi() {
 		return new ApiInfoBuilder().title("API Drugstore")
 				.description("API for conducting a CRUD of products and manufacturers ").version("1.0")
-				.termsOfServiceUrl("Terms of Service; Use for studies").license("License - Open Source")
+				.license("License - Open Source")
 				.contact(this.contact()).build();
 
 	}

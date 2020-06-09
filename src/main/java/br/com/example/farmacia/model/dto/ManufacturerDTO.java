@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ManufacturerDto {
+public class ManufacturerDTO {
 
 	private Integer id;
 	@NotBlank(message = "{codeManufacturer.not.blank}")
@@ -26,7 +26,7 @@ public class ManufacturerDto {
 	@NotBlank(message = "{countryOrigin.not.blank}")
 	private String countryOrigin;
 
-	public ManufacturerDto(Manufacturer manufacturer) {
+	public ManufacturerDTO(Manufacturer manufacturer) {
 		this.id = manufacturer.getId();
 		this.codeManufacturer = manufacturer.getCodeManufacturer();
 		this.fantasyName = manufacturer.getFantasyName();
@@ -34,8 +34,8 @@ public class ManufacturerDto {
 		this.countryOrigin = manufacturer.getCountryOrigin();
 	}
 
-	public static List<ManufacturerDto> conversor(List<Manufacturer> manufacturer) {
-		return manufacturer.stream().map(ManufacturerDto::new).collect(Collectors.toList());
+	public static List<ManufacturerDTO> conversor(List<Manufacturer> manufacturer) {
+		return manufacturer.stream().map(ManufacturerDTO::new).collect(Collectors.toList());
 	}
 
 
@@ -43,7 +43,7 @@ public class ManufacturerDto {
 		return new Manufacturer(codeManufacturer, fantasyName, cnpj, countryOrigin);
 	}
 
-	public ManufacturerDto(@NotNull String codeManufacturer, String fantasyName, Integer cnpj, String countryOrigin) {
+	public ManufacturerDTO(@NotNull String codeManufacturer, String fantasyName, Integer cnpj, String countryOrigin) {
 		this.codeManufacturer = codeManufacturer;
 		this.fantasyName = fantasyName;
 		this.cnpj = cnpj;

@@ -5,15 +5,15 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 import br.com.example.farmacia.model.Product;
-import br.com.example.farmacia.model.dto.ProductDto;
+import br.com.example.farmacia.model.dto.ProductDTO;
 
 public interface ProductService {
 
-	public abstract List<Product> searchProducts(ProductDto dto);
+	public abstract List<Product> searchProducts(ProductDTO dto);
 
-	public abstract ProductDto storeProduct(ProductDto dto);
+	public abstract ProductDTO storeProducts(ProductDTO dto);
 
-	public abstract ResponseEntity<Product> updateProduct(Integer code, ProductDto dto);
+	public abstract ResponseEntity<Product> updateProducts(Integer code, ProductDTO dto);
 
-	public abstract ResponseEntity<?> removeProduct(Integer code);
+	public abstract ResponseEntity<?> removeProducts(Integer code);
 }

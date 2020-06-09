@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductDto {
+public class ProductDTO {
 
 	private Integer id;
 
@@ -29,7 +29,7 @@ public class ProductDto {
 	@NotNull(message = "O campo price não pode ser vazio")
 	private int price;
 
-	public ProductDto(Product product) {
+	public ProductDTO(Product product) {
 		this.id = product.getId();
 		this.codeProduct = product.getCodeProduct();
 		this.fantasyName = product.getFantasyName();
@@ -45,22 +45,22 @@ public class ProductDto {
 	 * @param products
 	 * @return
 	 */
-	public static List<ProductDto> conversor(List<Product> products) {
-		return products.stream().map(ProductDto::new).collect(Collectors.toList());
+	public static List<ProductDTO> conversor(List<Product> products) {
+		return products.stream().map(ProductDTO::new).collect(Collectors.toList());
 	}
 
 	public Product newProduct() {
 		return new Product(codeProduct, fantasyName, nameProduct, price, manufacturer);
 	}
 
-	public ProductDto(Integer codeProduct, String fantasyName, String nameProduct, int price) {
+	public ProductDTO(Integer codeProduct, String fantasyName, String nameProduct, int price) {
 		this.codeProduct = codeProduct;
 		this.fantasyName = fantasyName;
 		this.nameProduct = nameProduct;
 		this.price = price;
 	}
 
-	public ProductDto(String nameProduct, String fantasyName) {
+	public ProductDTO(String nameProduct, String fantasyName) {
 		this.nameProduct = nameProduct;
 		this.fantasyName = fantasyName;
 
