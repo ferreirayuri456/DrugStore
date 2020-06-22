@@ -16,4 +16,6 @@ public interface ManufacturerService {
 	public abstract ResponseEntity<Manufacturer> updateManufacturer(Integer code, ManufacturerDTO dto);
 
 	public abstract ResponseEntity<?> removeManufacturer(Integer code);
+	
+	void sendToConsumer(ManufacturerDTO dto);
 }

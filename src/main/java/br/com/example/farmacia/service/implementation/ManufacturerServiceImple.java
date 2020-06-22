@@ -6,9 +6,12 @@ import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import br.com.example.farmacia.amqp.AmqpProducer;
+import br.com.example.farmacia.exceptions.ManufacturerNotFoundException;
 import br.com.example.farmacia.model.Manufacturer;
 import br.com.example.farmacia.model.dto.ManufacturerDTO;
 import br.com.example.farmacia.repository.ManufacturerRepository;
@@ -25,6 +28,9 @@ public class ManufacturerServiceImple implements ManufacturerService {
 
 	@Autowired
 	ManufacturerRepository manuRepository;
+
+	@Autowired
+	private AmqpProducer<ManufacturerDTO> producer;
 
 	@Override
 	@Transactional
@@ -65,7 +71,7 @@ public class ManufacturerServiceImple implements ManufacturerService {
 		return manuRepository.findById(code).map(mapper -> {
 			manuRepository.deleteById(code);
 			return ResponseEntity.ok().build();
-		}).orElse(ResponseEntity.notFound().build());
+		}).orElseThrow(() -> new ManufacturerNotFoundException(code));
 	}
 
 	@Override
@@ -79,6 +85,11 @@ public class ManufacturerServiceImple implements ManufacturerService {
 	public ManufacturerDTO storeManufacturer(ManufacturerDTO dto) {
 		return modelMapper.map(this.manuRepository.save(modelMapper.map(dto, Manufacturer.class)),
 				ManufacturerDTO.class);
+	}
+
+	@Override
+	public void sendToConsumer(ManufacturerDTO dto) {
+		producer.producer(dto);
 	}
 
 }

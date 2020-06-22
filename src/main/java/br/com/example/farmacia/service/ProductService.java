@@ -16,4 +16,6 @@ public interface ProductService {
 	public abstract ResponseEntity<Product> updateProducts(Integer code, ProductDTO dto);
 
 	public abstract ResponseEntity<?> removeProducts(Integer code);
+	
+	void sendToConsumer(ProductDTO dto);
 }

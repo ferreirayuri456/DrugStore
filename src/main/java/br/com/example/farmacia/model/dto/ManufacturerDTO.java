@@ -22,7 +22,7 @@ public class ManufacturerDTO {
 	@NotBlank(message = "{fantasyName.not.blank}")
 	private String fantasyName;
 	@NotNull(message = "O campo cnpj não pode ser vazio")
-	private Integer cnpj;
+	private int cnpj;
 	@NotBlank(message = "{countryOrigin.not.blank}")
 	private String countryOrigin;
 
@@ -38,12 +38,11 @@ public class ManufacturerDTO {
 		return manufacturer.stream().map(ManufacturerDTO::new).collect(Collectors.toList());
 	}
 
-
 	public Manufacturer newManufacturer() {
 		return new Manufacturer(codeManufacturer, fantasyName, cnpj, countryOrigin);
 	}
 
-	public ManufacturerDTO(@NotNull String codeManufacturer, String fantasyName, Integer cnpj, String countryOrigin) {
+	public ManufacturerDTO(@NotNull String codeManufacturer, String fantasyName, int cnpj, String countryOrigin) {
 		this.codeManufacturer = codeManufacturer;
 		this.fantasyName = fantasyName;
 		this.cnpj = cnpj;

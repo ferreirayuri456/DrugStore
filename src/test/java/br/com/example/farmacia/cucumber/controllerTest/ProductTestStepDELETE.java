@@ -5,14 +5,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.RestTemplate;
 
-import br.com.example.farmacia.repository.ProductRepository;
-import br.com.example.farmacia.service.ProductService;
 import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.Entao;
 

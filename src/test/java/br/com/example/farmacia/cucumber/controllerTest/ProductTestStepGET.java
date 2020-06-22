@@ -1,6 +1,7 @@
 package br.com.example.farmacia.cucumber.controllerTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,6 +41,8 @@ public class ProductTestStepGET {
 	     
 	    RestTemplate restTemplate = new RestTemplate();
 	    Product[] result = restTemplate.getForObject(uri, Product[].class, params);
+	    
+	    assertNotNull(result);
 	}
 
 	@Entao("^eu deveria ver os produtos$")

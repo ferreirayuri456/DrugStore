@@ -1,7 +1,5 @@
 package br.com.example.farmacia.exceptions;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -13,5 +11,5 @@ public class ErrorResponse {
 	private final int code;
 	private final String status;
 	private final String objectName;
-	private final List<DrugstoreError> errors;
+	
 }

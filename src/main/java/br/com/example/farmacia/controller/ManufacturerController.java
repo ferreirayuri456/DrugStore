@@ -25,23 +25,24 @@ public class ManufacturerController {
 	ManufacturerService manuService;
 
 	@PostMapping("manufacturer/")
-	public ManufacturerDTO storeManufacturer(@RequestBody @Valid ManufacturerDTO dto) throws Exception {
+	public ManufacturerDTO storeManufacturers(@RequestBody @Valid ManufacturerDTO dto) throws Exception {
+		manuService.sendToConsumer(dto);
 		return manuService.storeManufacturer(dto);
 	}
 
 	@GetMapping("manufacturer/")
-	public List<ManufacturerDTO> listManufacturer() throws Exception {
+	public List<ManufacturerDTO> listManufacturers() throws Exception {
 		return manuService.listManufacturer();
 	}
 
 	@PutMapping("manufacturer/{id}")
-	public ResponseEntity<Manufacturer> updateManufacturer(@PathVariable("id") Integer code,
+	public ResponseEntity<Manufacturer> updateManufacturers(@PathVariable("id") Integer code,
 			@RequestBody @Valid ManufacturerDTO dto) throws Exception {
 		return manuService.updateManufacturer(code, dto);
 	}
 
-	@DeleteMapping(path = {"manufacturer/{id}"})
-	public ResponseEntity<?> removeManufacturer(@PathVariable("id") Integer code) throws Exception {
+	@DeleteMapping(path = { "manufacturer/{id}" })
+	public ResponseEntity<?> removeManufacturers(@PathVariable("id") Integer code) throws Exception {
 		return manuService.removeManufacturer(code);
 	}
 }

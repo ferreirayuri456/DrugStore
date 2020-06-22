@@ -16,9 +16,13 @@ import lombok.NoArgsConstructor;
 @Data
 @Table(name = "MANUFACTURER")
 @Entity
-public class Manufacturer{
+public class Manufacturer extends BaseEntity{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;

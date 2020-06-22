@@ -1,15 +1,13 @@
 package br.com.example.farmacia.cucumber.controllerTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import br.com.example.farmacia.model.Product;
@@ -34,5 +32,6 @@ public class ManufacturerTestStepGET {
 		Product[] result = restTemplate.getForObject(uri, Product[].class, params);
 		
 		assertThat(HttpStatus.OK);
+		assertNotNull(result);
 	}
 }

@@ -10,6 +10,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import br.com.example.farmacia.amqp.AmqpProducer;
+import br.com.example.farmacia.exceptions.ProductNotFoundException;
 import br.com.example.farmacia.model.Product;
 import br.com.example.farmacia.model.dto.ProductDTO;
 import br.com.example.farmacia.repository.ProductRepository;
@@ -27,6 +29,9 @@ public class ProductServiceImple implements ProductService {
 
 	@Autowired
 	ProductRepository prodRepository;
+
+	@Autowired
+	private AmqpProducer<ProductDTO> amqp;
 
 	@Override
 	@Transactional
@@ -58,7 +63,7 @@ public class ProductServiceImple implements ProductService {
 					Product updated = prodRepository.save(mapped); // Salvo os produtos atualizados
 					return ResponseEntity.ok().body(updated); // Retorno com os produtos atualizados, se for encontrado
 																// retorno um 200
-				}).orElse(ResponseEntity.notFound().build()); // Se o id não for encontrado, retorno um 404
+				}).orElseThrow(() -> new ProductNotFoundException(code));
 	}
 
 	@Override
@@ -71,7 +76,7 @@ public class ProductServiceImple implements ProductService {
 		return prodRepository.findById(code).map(mapped -> {
 			prodRepository.deleteById(code);
 			return ResponseEntity.ok().build();
-		}).orElse(ResponseEntity.notFound().build());
+		}).orElseThrow(() -> new ProductNotFoundException(code));
 	}
 
 	@Override
@@ -84,6 +89,11 @@ public class ProductServiceImple implements ProductService {
 	public List<Product> searchProducts(ProductDTO dto) {
 		Specification<Product> spec = SpecificationProduct.findBySpecification(dto);
 		return prodRepository.findAll(spec);
+	}
+
+	@Override
+	public void sendToConsumer(ProductDTO dto) {
+		amqp.producer(dto);
 	}
 
 }
