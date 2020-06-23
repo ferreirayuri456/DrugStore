@@ -24,7 +24,7 @@ public class ProductTestStepDELETE {
 		String uri = "http://localhost:8082/{id}";
 
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("id", "6");
+		params.put("id", "4");
 
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.delete(uri, params);

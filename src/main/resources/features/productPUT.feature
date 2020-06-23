@@ -1,5 +1,5 @@
 # language: pt
-
+@FarmaciaTeste
 Funcionalidade: Testar a metodo PUT da API. 
 
 Esquema do Cenário: Atualizar os produtos pelo id

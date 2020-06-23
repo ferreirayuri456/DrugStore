@@ -39,7 +39,7 @@ public class ManufacturerDTO {
 	}
 
 	public Manufacturer newManufacturer() {
-		return new Manufacturer(codeManufacturer, fantasyName, cnpj, countryOrigin);
+		return new Manufacturer(codeManufacturer, fantasyName, cnpj, countryOrigin, null, null);
 	}
 
 	public ManufacturerDTO(@NotNull String codeManufacturer, String fantasyName, int cnpj, String countryOrigin) {

@@ -1,5 +1,5 @@
 # language: pt
-
+@FarmaciaTeste
 Funcionalidade: Testar a metodo GET da API. 
 
 Cenário: Lista todos os fabricantes 

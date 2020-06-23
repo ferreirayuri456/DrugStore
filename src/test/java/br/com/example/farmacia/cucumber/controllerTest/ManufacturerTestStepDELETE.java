@@ -25,7 +25,8 @@ public class ManufacturerTestStepDELETE {
 		String uri = "http://localhost:8082/manufacturer/{id}";
 
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("id", "2");
+		params.put("id", "2"); //sempre inserir um registro para que ele possa excluir
+		
 
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.delete(uri, params);

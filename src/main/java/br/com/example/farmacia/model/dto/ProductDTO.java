@@ -50,7 +50,7 @@ public class ProductDTO {
 	}
 
 	public Product newProduct() {
-		return new Product(codeProduct, fantasyName, nameProduct, price, manufacturer);
+		return new Product(codeProduct, fantasyName, nameProduct, price, manufacturer, null, null);
 	}
 
 	public ProductDTO(Integer codeProduct, String fantasyName, String nameProduct, int price) {

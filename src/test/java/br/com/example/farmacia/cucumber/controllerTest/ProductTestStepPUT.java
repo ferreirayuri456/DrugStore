@@ -44,7 +44,7 @@ public class ProductTestStepPUT {
 	}
 
 	@Entao("^eu deveria ver os dados atualizados$")
-	public void eu_deveria_ver_os_dados_atualizados() throws Throwable {
+	public void eu_deveria_ver_os_dados_atualizados() throws Throwable  {
 		assertThat(HttpStatus.OK);
 	}
 

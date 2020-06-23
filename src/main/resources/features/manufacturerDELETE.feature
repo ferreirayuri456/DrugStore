@@ -1,5 +1,5 @@
 # language: pt
-
+@FarmaciaTeste
 Funcionalidade:  Testar a metodo DELETE da API.
  
 Cenario: Deleta os fabricantes 

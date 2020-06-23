@@ -1,5 +1,8 @@
 package br.com.example.farmacia.model;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,9 +19,8 @@ import lombok.NoArgsConstructor;
 @Data
 @Table(name = "MANUFACTURER")
 @Entity
-public class Manufacturer extends BaseEntity{
+public class Manufacturer extends BaseEntity {
 
-	
 	/**
 	 * 
 	 */
@@ -34,11 +36,14 @@ public class Manufacturer extends BaseEntity{
 	private Integer cnpj;
 	@Column(name = "COUNTRY_ORIGIN")
 	private String countryOrigin;
-	
-	public Manufacturer(String codeManufacturer, String fantasyName, Integer cnpj, String countryOrigin) {
+
+	public Manufacturer(String codeManufacturer, String fantasyName, Integer cnpj, String countryOrigin,
+			LocalDateTime dataChangeCreatedTime, LocalDateTime dataChangeLastModifiedTime) {
 		this.codeManufacturer = codeManufacturer;
 		this.fantasyName = fantasyName;
 		this.cnpj = cnpj;
 		this.countryOrigin = countryOrigin;
+		this.dataChangeCreatedTime = dataChangeCreatedTime;
+		this.dataChangeLastModifiedTime = dataChangeLastModifiedTime;
 	}
 }

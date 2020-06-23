@@ -1,5 +1,5 @@
 # language: pt
-
+@FarmaciaTeste
 Funcionalidade: Testar a metodo POST da API. 
 
 Esquema do Cenário: Como um cliente, eu quero criar um novo produto 

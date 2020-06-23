@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,18 +19,14 @@ import io.cucumber.java.pt.Entao;
 
 public class ProductTestStepGET {
 
-	@LocalServerPort
-	private int port = 8082;
-	private RestTemplate rest = new RestTemplate();
-	private String postUrl = "http://localhost";
+
 
 	@Autowired
 	RestTemplate restTemplate;
 
 	@Dado("^eu perfomo a operacao GET com '/'$")
 	public void eu_perfomo_a_operacao_GET_com() throws Throwable {
-		String url = postUrl + ":" + port + "/";
-		ResponseEntity<String> response = rest.getForEntity(url, String.class);
+		RestTemplate restTemplate = new RestTemplateBuilder().rootUri("http://localhost:8082/").build();
 	}
 
 	@Dado("^eu perfomo a operacao GET pelo numero '(\\d+)'$")
@@ -37,7 +34,7 @@ public class ProductTestStepGET {
 		final String uri = "http://localhost:8082/";
 
 		Map<String, String> params = new HashMap<String, String>();
-	    params.put("id", "1");
+	    params.put("id", "6");
 	     
 	    RestTemplate restTemplate = new RestTemplate();
 	    Product[] result = restTemplate.getForObject(uri, Product[].class, params);

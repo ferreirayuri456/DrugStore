@@ -27,7 +27,7 @@ public class ManufacturerTestStepPUT {
 		String uri = "http://localhost:8082/manufacturer/{id}";
 
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("id", "2");
+		params.put("id", "3");
 
 		Manufacturer newManu = new Manufacturer();
 		newManu.setId(id);

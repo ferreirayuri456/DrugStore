@@ -19,20 +19,19 @@ public class ProductTestStepPOST {
 	private int port = 8082;
 	private RestTemplate rest = new RestTemplate();
 	private String postUrl = "http://localhost";
-	
-	private String id = "";
+
 
 	@Dado("^eu posso criar um novo produto$")
 	public void eu_posso_criar_um_novo_produto() throws Throwable {
 		String url = postUrl + ":" + port + "/";
 		List<Product> allProducts = rest.getForObject(url, List.class);
-
 	}
 
-	@Dado("^eu mando uma requisicao com o id(\\d+), codigo do produto (\\d+), o nome do produto \"([^\"]*)\", o nome fantasia \"([^\"]*)\", o fabricante \"([^\"]*)\" e o preco (\\d+)$")
+	@Dado("^eu mando uma requisicao com o id (\\d+), codigo do produto (\\d+), o nome do produto \"([^\"]*)\", o nome fantasia \"([^\"]*)\", o fabricante \"([^\"]*)\" e o preco (\\d+)$")
 	public void eu_mando_uma_requisicao_com_o_id_codigo_do_produto_o_nome_do_produto_o_nome_fantasia_o_fabricante_e_o_preco(
-			int id, int codeProduct, String fantasyName, String nameProduct, String manufacturer, int price) throws Throwable {
-		String url = postUrl + ":" + port + "/";
+			int id, int codeProduct, String fantasyName, String manufacturer, String nameProduct, int price)
+			throws Throwable {
+		String url = postUrl + ":" + port + "/";		
 		Product newProd = new Product();
 		newProd.setId(id);
 		newProd.setCodeProduct(codeProduct);
@@ -40,17 +39,17 @@ public class ProductTestStepPOST {
 		newProd.setManufacturer(manufacturer);
 		newProd.setNameProduct(nameProduct);
 		newProd.setPrice(price);
-		id = newProd.getId();
 		Product[] prod = rest.getForObject(url, Product[].class);
 		assertNotNull(prod);
+		assertThat(HttpStatus.CREATED);
 	}
 
 	@Entao("^eu deveria ver o novo produto criado$")
 	public void eu_deveria_ver_o_novo_produto_criado() throws Throwable {
-		String url = postUrl + ":" + port + "/" + id;
-		Product[] prodCriado = rest.getForObject(url, Product[].class);
-		assertNotNull(prodCriado);
+		String url = postUrl + ":" + port + "/";
+		Product[] manu = rest.getForObject(url, Product[].class);
 		assertThat(HttpStatus.CREATED);
+		assertNotNull(manu);
 	}
 
 }

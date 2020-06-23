@@ -1,6 +1,7 @@
 package br.com.example.farmacia.model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -21,26 +22,26 @@ public class BaseEntity implements Serializable{
 	private boolean deleted = false;
 
 	@Column(name = "DataChange_CreatedTime", nullable = false)
-	private Date dataChangeCreatedTime;
+	protected LocalDateTime dataChangeCreatedTime;
 	
 	@Column(name = "DataChange_LastTime")
-	private Date dataChangeLastModifiedTime;
+	protected LocalDateTime dataChangeLastModifiedTime;
 	
 	
 	@PrePersist
 	protected void prePresist() {
-		if (this.dataChangeCreatedTime == null) dataChangeCreatedTime = new Date();
-		if (this.dataChangeLastModifiedTime == null) dataChangeLastModifiedTime = new Date();
+		if (this.dataChangeCreatedTime == null) dataChangeCreatedTime = LocalDateTime.now();
+		if (this.dataChangeLastModifiedTime == null) dataChangeLastModifiedTime = LocalDateTime.now();
 	}
 	
 	@PreUpdate
 	protected void preUpdate() {
-		this.dataChangeLastModifiedTime = new Date();
+		this.dataChangeLastModifiedTime = LocalDateTime.now();
 	}
 	
 	@PreRemove
 	protected void preRemove() {
-		this.dataChangeLastModifiedTime = new Date();
+		this.dataChangeLastModifiedTime = LocalDateTime.now();
 	}
 	
 }
