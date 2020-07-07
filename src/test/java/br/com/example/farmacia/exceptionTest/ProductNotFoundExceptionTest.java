@@ -1,28 +1,24 @@
 package br.com.example.farmacia.exceptionTest;
 
 import static org.junit.Assert.fail;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.example.farmacia.config.Util;
 import br.com.example.farmacia.exceptions.ProductNotFoundException;
 import br.com.example.farmacia.model.Product;
-import br.com.example.farmacia.model.dto.ProductDTO;
 import br.com.example.farmacia.repository.ProductRepository;
 import br.com.example.farmacia.service.ProductService;
 

@@ -1,5 +1,6 @@
 package br.com.example.farmacia.model.dto;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +26,8 @@ public class ManufacturerDTO {
 	private int cnpj;
 	@NotBlank(message = "{countryOrigin.not.blank}")
 	private String countryOrigin;
+	private LocalDateTime dataChangeCreatedTime;
+	private LocalDateTime dataChangeLastModifiedTime;
 
 	public ManufacturerDTO(Manufacturer manufacturer) {
 		this.id = manufacturer.getId();
@@ -39,7 +42,8 @@ public class ManufacturerDTO {
 	}
 
 	public Manufacturer newManufacturer() {
-		return new Manufacturer(codeManufacturer, fantasyName, cnpj, countryOrigin, null, null);
+		return new Manufacturer(id, codeManufacturer, fantasyName, cnpj, countryOrigin, dataChangeCreatedTime,
+				dataChangeLastModifiedTime);
 	}
 
 	public ManufacturerDTO(@NotNull String codeManufacturer, String fantasyName, int cnpj, String countryOrigin) {

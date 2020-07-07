@@ -1,7 +1,6 @@
 package br.com.example.farmacia.model;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,8 +36,9 @@ public class Manufacturer extends BaseEntity {
 	@Column(name = "COUNTRY_ORIGIN")
 	private String countryOrigin;
 
-	public Manufacturer(String codeManufacturer, String fantasyName, Integer cnpj, String countryOrigin,
+	public Manufacturer(Integer id, String codeManufacturer, String fantasyName, Integer cnpj, String countryOrigin,
 			LocalDateTime dataChangeCreatedTime, LocalDateTime dataChangeLastModifiedTime) {
+		this.id = id;
 		this.codeManufacturer = codeManufacturer;
 		this.fantasyName = fantasyName;
 		this.cnpj = cnpj;

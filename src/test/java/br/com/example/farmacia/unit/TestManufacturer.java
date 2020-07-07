@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.example.farmacia.config.Util;
 import br.com.example.farmacia.model.Manufacturer;
+import br.com.example.farmacia.model.dto.ManufacturerDTO;
 import br.com.example.farmacia.repository.ManufacturerRepository;
+import br.com.example.farmacia.service.ManufacturerService;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -42,13 +45,18 @@ public class TestManufacturer {
 	@Autowired
 	ObjectMapper objectMapper;
 
+	@Autowired
+	ManufacturerService manuService;
+
+	private List<ManufacturerDTO> manuList;
+
 	private static Manufacturer manu = new Manufacturer(1, "Dorflex", "Dorflex", 1234567, "Brazil");
 	private static LocalDateTime dataChangeCreatedTime = LocalDateTime.now();
 	private static LocalDateTime dataChangeLastModifiedTime = LocalDateTime.now();
 
 	@Test
-	public void testStoreManufacturer() {
-		Manufacturer manu = new Manufacturer("Dorflex", "DOVE", 159753, "Brazil", dataChangeCreatedTime,
+	public void testStoreManufacturer() throws Exception {
+		Manufacturer manu = new Manufacturer(1, "Dorflex", "DOVE", 159753, "Brazil", dataChangeCreatedTime,
 				dataChangeLastModifiedTime);
 		this.manuRepository.save(manu);
 		assertThat(manu.getId()).isNotNull();
@@ -60,12 +68,11 @@ public class TestManufacturer {
 				|| dataChangeCreatedTime.isEqual(LocalDateTime.now()));
 		assertTrue(dataChangeLastModifiedTime.isBefore(LocalDateTime.now())
 				|| dataChangeLastModifiedTime.isEqual(LocalDateTime.now()));
-
 	}
 
 	@Test
 	public void testRemoveManufacturer() {
-		Manufacturer manu = new Manufacturer("Dorflex", "DOVE", 159753, "Brazil", dataChangeCreatedTime,
+		Manufacturer manu = new Manufacturer(1, "Dorflex", "DOVE", 159753, "Brazil", dataChangeCreatedTime,
 				dataChangeLastModifiedTime);
 		this.manuRepository.save(manu);
 		manuRepository.delete(manu);
@@ -79,7 +86,7 @@ public class TestManufacturer {
 
 	@Test
 	public void testUpdateManufacturer() {
-		Manufacturer manu = new Manufacturer("Buscofem", "Comprimido para cólicas menstruais", 12365489, "EUA",
+		Manufacturer manu = new Manufacturer(1, "Buscofem", "Comprimido para cólicas menstruais", 12365489, "EUA",
 				dataChangeCreatedTime, dataChangeLastModifiedTime);
 		this.manuRepository.save(manu);
 		manu.setCodeManufacturer("Buscofem");
