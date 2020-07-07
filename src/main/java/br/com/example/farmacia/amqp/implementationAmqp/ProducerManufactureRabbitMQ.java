@@ -15,12 +15,12 @@ public class ProducerManufactureRabbitMQ implements AmqpProducer<ManufacturerDTO
 	@Autowired
 	private RabbitTemplate rabbit;
 	
-	@Value("${spring.rabbitmq.request.routing-key.producer}")
+	@Value("${spring.rabbitmq.request.routing-key.producer-manufacture}")
 	private String queue;
-	@Value("${spring.rabbitmq.request.exchange.producer}")
+
+	@Value("${spring.rabbitmq.request.exchange.producer-manufacture}")
 	private String exchange;
-	
-	
+
 	@Override
 	public void producer(ManufacturerDTO dto) {
 		try {

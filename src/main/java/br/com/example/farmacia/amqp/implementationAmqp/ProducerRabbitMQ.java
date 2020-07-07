@@ -17,6 +17,7 @@ public class ProducerRabbitMQ implements AmqpProducer<ProductDTO> {
 
 	@Value("${spring.rabbitmq.request.routing-key.producer}")
 	private String queue;
+
 	@Value("${spring.rabbitmq.request.exchange.producer}")
 	private String exchange;
 

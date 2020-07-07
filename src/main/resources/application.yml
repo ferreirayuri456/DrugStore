@@ -21,16 +21,20 @@ spring:
       ddl-auto: update
     generate-ddl: true
     show-sql: true
-  rabbitmq:    request:
+  rabbitmq:
+    request:
       host: localhost
       port: 5672
       username: guest
       password: guest
       exchange:
-        producer: ex.producer.farmacia
+        producer: ex.producer.farmacia.producer
+        producer-manufacture: ex.producer.farmacia.producer.manufacture
       routing-key:
-        producer: rk.producer.farmacia
+        producer: rk.producer.farmacia.producer
+        producer-manufacture: rk.producer.farmacia.producer.manufacture
       dead-letter:
-        producer: dl.producer.farmacia  
+        producer: dl.producer.farmacia.producer
+        producer-manufacture: dl.producer.farmacia.producer.manufacture
 server:
   port: 8082
